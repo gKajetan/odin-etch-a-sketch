@@ -7,21 +7,26 @@ let currentSliderValue = parseInt(slider.value);
 
 var mouseDown = false;
 
+function disableSquareDrag() {
+    $('.square').attr('draggable', false);
+}
+
 function clearGrid() {
     container.innerHTML = '';
 }
 
 function drawingActive(square) {
+    // draw on click
+    square.addEventListener('mousedown', (event) => {
+        mouseDown = true;
+        event.target.style.backgroundColor = "black"; 
+    });
+
     // draw on hold
     square.addEventListener("mouseover", (event) => {
         if (mouseDown) {
             event.target.style.backgroundColor = "black";
         }
-    });
-
-    // draw on click
-    square.addEventListener("click", (event) => {
-        event.target.style.backgroundColor = "black";
     });
 }
 
@@ -50,10 +55,6 @@ slider.oninput = function () {
     sliderText.innerHTML = this.value;
     createGrid(this.value);
 }
-
-document.addEventListener('mousedown', () => {
-    mouseDown = true;
-})
 
 document.addEventListener('mouseup', () => {
     mouseDown = false;

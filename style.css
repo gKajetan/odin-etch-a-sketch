@@ -1,3 +1,26 @@
-* {
-    background-color: grey;
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.squaresContainer {
+    display: flex;
+    flex-direction: column; /* row under row */
+    width: 400px;
+    height: 400px;
+    border: 1px solid red;
+}
+
+.row {
+    display: flex;
+    flex: 1; 
+}
+
+.square { 
+    flex: 1;
+    border: 1px solid blue;
 }

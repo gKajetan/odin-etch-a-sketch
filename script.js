@@ -1,11 +1,12 @@
 console.log('init');
 const container = document.querySelector('.squaresContainer');
+// slider
 const sliderText = document.querySelector('#sliderText');
 const slider = document.querySelector('#slider');
-const setting = document.querySelector(`#setting`);
 sliderText.innerHTML = slider.value;
 let currentSliderValue = parseInt(slider.value);
 
+const setting = document.querySelector(`#setting`);
 const settingsContainer = document.querySelector('.settingsContainer');
 const normalModeRadio = document.querySelector('#normal');
 let currentMode = normalModeRadio.value;
@@ -16,17 +17,20 @@ function clearGrid() {
     container.innerHTML = '';
 }
 
-function drawingActive(square) { 
+function drawingActive(square) {
     // draw with chosen mode
     const draw = (event) => {
         if (currentMode === 'normal') {
-            event.target.style.backgroundColor = "black"; 
+            event.target.style.backgroundColor = "black";
         }
         else if (currentMode === 'eraser') {
-            event.target.style.backgroundColor = "white"; 
+            event.target.style.backgroundColor = "white";
+        }
+        else if (currentMode === 'rainbow') {
+            event.target.style.backgroundColor = getRandomColor();
         }
     };
-    
+
     // draw on click
     square.addEventListener('mousedown', (event) => {
         mouseDown = true;
@@ -46,6 +50,16 @@ function updateDrawingMode(event) {
         currentMode = event.target.value;
         console.log(`Active mode: ${currentMode}`);
     }
+}
+
+function getRandomColor() {
+    // random R G B color channels
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    
+    // return complete RGB color
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 function createGrid(size) {

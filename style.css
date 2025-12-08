@@ -36,11 +36,16 @@ body {
     background-color: white;
 }
 
-.settingsContainer {
+.sideBar {
     background-color:bisque;
     width: 200px;
     padding: 16px;
     text-align: center;
+}
+
+.settingsContainer {
+    text-align: left;
+    padding: 32px;
 }
 
 footer {

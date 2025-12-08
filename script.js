@@ -2,32 +2,50 @@ console.log('init');
 const container = document.querySelector('.squaresContainer');
 const sliderText = document.querySelector('#sliderText');
 const slider = document.querySelector('#slider');
+const setting = document.querySelector(`#setting`);
 sliderText.innerHTML = slider.value;
 let currentSliderValue = parseInt(slider.value);
 
-var mouseDown = false;
+const settingsContainer = document.querySelector('.settingsContainer');
+const normalModeRadio = document.querySelector('#normal');
+let currentMode = normalModeRadio.value;
 
-function disableSquareDrag() {
-    $('.square').attr('draggable', false);
-}
+let mouseDown = false;
 
 function clearGrid() {
     container.innerHTML = '';
 }
 
-function drawingActive(square) {
+function drawingActive(square) { 
+    // draw with chosen mode
+    const draw = (event) => {
+        if (currentMode === 'normal') {
+            event.target.style.backgroundColor = "black"; 
+        }
+        else if (currentMode === 'eraser') {
+            event.target.style.backgroundColor = "white"; 
+        }
+    };
+    
     // draw on click
     square.addEventListener('mousedown', (event) => {
         mouseDown = true;
-        event.target.style.backgroundColor = "black"; 
+        draw(event);
     });
 
     // draw on hold
     square.addEventListener("mouseover", (event) => {
         if (mouseDown) {
-            event.target.style.backgroundColor = "black";
+            draw(event);
         }
     });
+}
+
+function updateDrawingMode(event) {
+    if (event.target.type === 'radio') {
+        currentMode = event.target.value;
+        console.log(`Active mode: ${currentMode}`);
+    }
 }
 
 function createGrid(size) {
@@ -59,5 +77,7 @@ slider.oninput = function () {
 document.addEventListener('mouseup', () => {
     mouseDown = false;
 })
+
+settingsContainer.addEventListener('change', updateDrawingMode);
 
 createGrid(slider.value);

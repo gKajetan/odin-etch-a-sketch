@@ -1,29 +1,36 @@
-console.log('init');
+console.log('Etch-A-Sketch started.');
+
+// container with squares / canvas
 const container = document.querySelector('.squaresContainer');
+
 // slider
 const sliderText = document.querySelector('#sliderText');
 const slider = document.querySelector('#slider');
 sliderText.innerHTML = slider.value;
 let currentSliderValue = parseInt(slider.value);
 
+// settings for modes
 const setting = document.querySelector(`#setting`);
 const settingsContainer = document.querySelector('.settingsContainer');
 const normalModeRadio = document.querySelector('#normal');
 let currentMode = normalModeRadio.value;
 
-let colorPicker = document.querySelector("#colorPicker");
-
-const gridSwitch = document.querySelector("#gridSwitch");
-
+// color picker
+const colorPicker = document.querySelector("#colorPicker");
 let chosenColor = colorPicker.value;
 
+// grid switcher
+const gridSwitch = document.querySelector("#gridSwitch");
 
+// user is not holding mouse button by default
 let mouseDown = false;
 
+// clears grid so new grid can take its place
 function clearGrid() {
     container.innerHTML = '';
 }
 
+// sets up active drawing mode and its propeties
 function drawingActive(square) {
     // draw with chosen mode
     const draw = (event) => {
@@ -41,6 +48,7 @@ function drawingActive(square) {
         }
         // this works only because background of square container is black
         else if (currentMode === 'shader') {
+            // parse opacity of target and set its value to 1
             let currentOpacity = parseFloat(event.target.style.opacity) || 1;
 
             if (currentOpacity != 0.1) {
@@ -64,6 +72,7 @@ function drawingActive(square) {
     });
 }
 
+// switch drawing mode based on radio choice
 function updateDrawingMode(event) {
     if (event.target.type === 'radio') {
         currentMode = event.target.value;
@@ -81,6 +90,7 @@ function getRandomColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+// creates grid of squares based on size
 function createGrid(size) {
     // clear grid
     clearGrid();
@@ -103,27 +113,36 @@ function createGrid(size) {
 }
 
 // listeners
+
+// get and set slider value
 slider.oninput = function () {
     sliderText.innerHTML = this.value;
     createGrid(this.value);
 }
 
+// get and set color picker value
 colorPicker.oninput = function () {
     chosenColor = this.value;
 }
 
+// check whether user stopped holding mouse button
 document.addEventListener('mouseup', () => {
     mouseDown = false;
 })
 
+// listen for radio button changes
 settingsContainer.addEventListener('change', updateDrawingMode);
 
+// grid switcher
 gridSwitch.addEventListener('click', function() {
+    // select every square
     const allSquares = document.querySelectorAll('.square');
 
+    // switch border for each square
     allSquares.forEach(square => {
         square.classList.toggle('squareBorder');
     });
 });
 
+// create start grid
 createGrid(slider.value);

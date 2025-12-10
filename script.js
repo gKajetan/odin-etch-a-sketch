@@ -22,12 +22,24 @@ function drawingActive(square) {
     const draw = (event) => {
         if (currentMode === 'normal') {
             event.target.style.backgroundColor = "black";
+            event.target.style.opacity = 1;
         }
         else if (currentMode === 'eraser') {
             event.target.style.backgroundColor = "white";
+            event.target.style.opacity = 1;
         }
         else if (currentMode === 'rainbow') {
             event.target.style.backgroundColor = getRandomColor();
+            event.target.style.opacity = 1;
+        }
+        // this works only because background of square container is black
+        else if (currentMode === 'shader') {
+            let currentOpacity = parseFloat(event.target.style.opacity) || 1;
+
+            if (currentOpacity != 0.1) {
+                let newOpacity = currentOpacity - 0.1;
+                event.target.style.opacity = newOpacity;
+            }  
         }
     };
 
@@ -57,7 +69,7 @@ function getRandomColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
-    
+
     // return complete RGB color
     return `rgb(${r}, ${g}, ${b})`;
 }

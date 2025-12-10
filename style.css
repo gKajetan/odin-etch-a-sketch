@@ -37,6 +37,10 @@ body {
     background-color: white;
 }
 
+.squareBorder { 
+    border: 1px solid gainsboro;
+}
+
 .sideBar {
     background-color:bisque;
     width: 200px;

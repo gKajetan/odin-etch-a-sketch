@@ -16,6 +16,10 @@
         <div class="sideBar">
             <p>Pixel grid size: <span id="sliderText">0</span></p>
             <input type="range" min="1" max="64" value="8" id="slider">
+            <div>
+                <input type="checkbox" id="gridSwitch" value="gridSwitch" checked />
+                <label for="gridSwitch">Grid</label>
+            </div>
 
             <div class="settingsContainer">
                 <div>
@@ -37,10 +41,11 @@
                     <input type="radio" id="eraser" name="setting" value="eraser" />
                     <label for="eraser">Eraser</label>
                 </div>
-            </div>
-            <div>
-                <p>Choose color</p>
-                <input type="color" id="colorPicker" value="#000000" />
+
+                <hr>
+                <div>
+                    Color: <span><input type="color" id="colorPicker" value="#000000" /></span>
+                </div>
             </div>
         </div>
         <div class="squaresContainer">

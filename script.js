@@ -13,6 +13,8 @@ let currentMode = normalModeRadio.value;
 
 let colorPicker = document.querySelector("#colorPicker");
 
+const gridSwitch = document.querySelector("#gridSwitch");
+
 let chosenColor = colorPicker.value;
 
 
@@ -92,6 +94,7 @@ function createGrid(size) {
         for (let j = 0; j < size; j++) {
             let square = document.createElement('div');
             square.classList.add('square');
+            square.classList.add('squareBorder');
             drawingActive(square);
             row.appendChild(square);
         }
@@ -114,5 +117,13 @@ document.addEventListener('mouseup', () => {
 })
 
 settingsContainer.addEventListener('change', updateDrawingMode);
+
+gridSwitch.addEventListener('click', function() {
+    const allSquares = document.querySelectorAll('.square');
+
+    allSquares.forEach(square => {
+        square.classList.toggle('squareBorder');
+    });
+});
 
 createGrid(slider.value);

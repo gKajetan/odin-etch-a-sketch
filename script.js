@@ -11,6 +11,11 @@ const settingsContainer = document.querySelector('.settingsContainer');
 const normalModeRadio = document.querySelector('#normal');
 let currentMode = normalModeRadio.value;
 
+let colorPicker = document.querySelector("#colorPicker");
+
+let chosenColor = colorPicker.value;
+
+
 let mouseDown = false;
 
 function clearGrid() {
@@ -21,7 +26,7 @@ function drawingActive(square) {
     // draw with chosen mode
     const draw = (event) => {
         if (currentMode === 'normal') {
-            event.target.style.backgroundColor = "black";
+            event.target.style.backgroundColor = chosenColor;
             event.target.style.opacity = 1;
         }
         else if (currentMode === 'eraser') {
@@ -98,6 +103,10 @@ function createGrid(size) {
 slider.oninput = function () {
     sliderText.innerHTML = this.value;
     createGrid(this.value);
+}
+
+colorPicker.oninput = function () {
+    chosenColor = this.value;
 }
 
 document.addEventListener('mouseup', () => {
